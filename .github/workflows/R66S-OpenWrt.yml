@@ -5,7 +5,7 @@ on:
 #    - cron: 5 6 * * 0
   push:
     branches:
-      - 23.05
+      - 23.05_DoH
 
 jobs:
   build:
@@ -120,8 +120,8 @@ jobs:
         gzip --best *.img
         ls -Ahl
         sha256sum openwrt*r66s* | tee R66S-GC404-$(date +%Y-%m-%d)-${{ env.latest_release }}.sha256sum
-        zip R66S-GC404-Docker-$(date +%Y-%m-%d)-${{ env.latest_release }}-ext4.zip *r66s*ext4*
-        zip R66S-GC404-Docker-$(date +%Y-%m-%d)-${{ env.latest_release }}-sfs.zip *r66s*squashfs*
+        zip R66S-GC404-Docker-DoH-$(date +%Y-%m-%d)-${{ env.latest_release }}-ext4.zip *r66s*ext4*
+        zip R66S-GC404-Docker-DoH-$(date +%Y-%m-%d)-${{ env.latest_release }}-sfs.zip *r66s*squashfs*
         ls -Ahl
     - name: Create release
       id: create_release
