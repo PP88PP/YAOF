@@ -59,7 +59,7 @@ cp -rf ../PATCH/kernel/wg/* ./target/linux/generic/hack-6.12/
 # dont wrongly interpret first-time data
 echo "net.netfilter.nf_conntrack_tcp_max_retrans=5" >>./package/kernel/linux/files/sysctl-nf-conntrack.conf
 # OTHERS
-cp -rf ../PATCH/kernel/others/* ./target/linux/generic/pending-6.12/
+#cp -rf ../PATCH/kernel/others/* ./target/linux/generic/pending-6.12/
 
 ### Fullcone-NAT 部分 ###
 # bcmfullcone
@@ -145,7 +145,7 @@ cp -rf ../lede_pkg_ma/lang/golang ./feeds/packages/lang/golang
 wget https://github.com/rust-lang/rust/commit/e8d97f0.patch -O feeds/packages/lang/rust/patches/e8d97f0.patch
 # mount cgroupv2
 pushd feeds/packages
-patch -p1 <../../../PATCH/pkgs/cgroupfs-mount/0001-fix-cgroupfs-mount.patch
+#patch -p1 <../../../PATCH/pkgs/cgroupfs-mount/0001-fix-cgroupfs-mount.patch
 popd
 mkdir -p feeds/packages/utils/cgroupfs-mount/patches
 cp -rf ../PATCH/pkgs/cgroupfs-mount/900-mount-cgroup-v2-hierarchy-to-sys-fs-cgroup-cgroup2.patch ./feeds/packages/utils/cgroupfs-mount/patches/
