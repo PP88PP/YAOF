@@ -120,7 +120,7 @@ jobs:
         mv openwrt/bin/targets/rockchip/armv8/*sysupgrade.img* ./artifact/
         cd ./artifact/
         ls -Ahl
-        gzip -d *.gz && exit 0
+        gzip -d *.gz || true
         gzip --best *.img
         ls -Ahl
         sha256sum openwrt*r66s* | tee R66S-GC404-$(date +%Y-%m-%d)-${{ env.latest_release }}.sha256sum
