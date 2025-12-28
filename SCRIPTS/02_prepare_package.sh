@@ -59,7 +59,9 @@ cp -rf ../PATCH/kernel/wg/* ./target/linux/generic/hack-6.12/
 # dont wrongly interpret first-time data
 echo "net.netfilter.nf_conntrack_tcp_max_retrans=5" >>./package/kernel/linux/files/sysctl-nf-conntrack.conf
 # OTHERS
-#cp -rf ../PATCH/kernel/others/* ./target/linux/generic/pending-6.12/
+cp -rf ../PATCH/kernel/others/* ./target/linux/generic/pending-6.12/
+# luci-app-attendedsysupgrade
+sed -i '/luci-app-attendedsysupgrade/d' feeds/luci/collections/luci-nginx/Makefile
 
 ### Fullcone-NAT 部分 ###
 # bcmfullcone
@@ -140,7 +142,8 @@ rm -rf ./package/new/feeds_packages_lang_node-prebuilt
 cp -rf ../OpenWrt-Add/feeds_packages_lang_node-prebuilt ./feeds/packages/lang/node
 # 更换 golang 版本
 rm -rf ./feeds/packages/lang/golang
-cp -rf ../lede_pkg_ma/lang/golang ./feeds/packages/lang/golang
+#cp -rf ../lede_pkg_ma/lang/golang ./feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 26.x feeds/packages/lang/golang
 # rust
 wget https://github.com/rust-lang/rust/commit/e8d97f0.patch -O feeds/packages/lang/rust/patches/e8d97f0.patch
 # mount cgroupv2
@@ -156,6 +159,7 @@ wget -qO - https://github.com/coolsnowwolf/lede/commit/8a4db76.patch | patch -p1
 # Boost 通用即插即用
 rm -rf ./feeds/packages/net/miniupnpd
 cp -rf ../openwrt_pkg_ma/net/miniupnpd ./feeds/packages/net/miniupnpd
+mkdir -p feeds/packages/net/miniupnpd/patches
 wget https://github.com/miniupnp/miniupnp/commit/0e8c68d.patch -O feeds/packages/net/miniupnpd/patches/0e8c68d.patch
 sed -i 's,/miniupnpd/,/,g' ./feeds/packages/net/miniupnpd/patches/0e8c68d.patch
 wget https://github.com/miniupnp/miniupnp/commit/21541fc.patch -O feeds/packages/net/miniupnpd/patches/21541fc.patch
@@ -168,7 +172,8 @@ wget https://github.com/miniupnp/miniupnp/commit/60f5705.patch -O feeds/packages
 sed -i 's,/miniupnpd/,/,g' ./feeds/packages/net/miniupnpd/patches/60f5705.patch
 wget https://github.com/miniupnp/miniupnp/commit/3f3582b.patch -O feeds/packages/net/miniupnpd/patches/3f3582b.patch
 sed -i 's,/miniupnpd/,/,g' ./feeds/packages/net/miniupnpd/patches/3f3582b.patch
-cp -rf ../PATCH/pkgs/miniupnpd/301-options-force_forwarding-support.patch ./feeds/packages/net/miniupnpd/patches/
+wget https://github.com/miniupnp/miniupnp/commit/6aefa9a.patch -O feeds/packages/net/miniupnpd/patches/6aefa9a.patch
+sed -i 's,/miniupnpd/,/,g' ./feeds/packages/net/miniupnpd/patches/6aefa9a.patch
 pushd feeds/packages
 patch -p1 <../../../PATCH/pkgs/miniupnpd/01-set-presentation_url.patch
 patch -p1 <../../../PATCH/pkgs/miniupnpd/02-force_forwarding.patch
